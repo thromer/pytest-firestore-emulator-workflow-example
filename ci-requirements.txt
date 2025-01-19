@@ -1,0 +1,4 @@
+# Packages needed for CI
+-r requirements.txt
+pytest
+firebase-admin

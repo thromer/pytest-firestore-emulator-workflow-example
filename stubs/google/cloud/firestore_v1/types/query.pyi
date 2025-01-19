@@ -1,0 +1,99 @@
+import proto
+from _typeshed import Incomplete
+from google.cloud.firestore_v1.types import document
+from google.protobuf import wrappers_pb2
+from typing import MutableSequence
+
+__protobuf__: Incomplete
+
+class StructuredQuery(proto.Message):
+    class Direction(proto.Enum):
+        DIRECTION_UNSPECIFIED: int
+        ASCENDING: int
+        DESCENDING: int
+    class CollectionSelector(proto.Message):
+        collection_id: str
+        all_descendants: bool
+    class Filter(proto.Message):
+        composite_filter: StructuredQuery.CompositeFilter
+        field_filter: StructuredQuery.FieldFilter
+        unary_filter: StructuredQuery.UnaryFilter
+    class CompositeFilter(proto.Message):
+        class Operator(proto.Enum):
+            OPERATOR_UNSPECIFIED: int
+            AND: int
+            OR: int
+        op: StructuredQuery.CompositeFilter.Operator
+        filters: MutableSequence['StructuredQuery.Filter']
+    class FieldFilter(proto.Message):
+        class Operator(proto.Enum):
+            OPERATOR_UNSPECIFIED: int
+            LESS_THAN: int
+            LESS_THAN_OR_EQUAL: int
+            GREATER_THAN: int
+            GREATER_THAN_OR_EQUAL: int
+            EQUAL: int
+            NOT_EQUAL: int
+            ARRAY_CONTAINS: int
+            IN: int
+            ARRAY_CONTAINS_ANY: int
+            NOT_IN: int
+        field: StructuredQuery.FieldReference
+        op: StructuredQuery.FieldFilter.Operator
+        value: document.Value
+    class UnaryFilter(proto.Message):
+        class Operator(proto.Enum):
+            OPERATOR_UNSPECIFIED: int
+            IS_NAN: int
+            IS_NULL: int
+            IS_NOT_NAN: int
+            IS_NOT_NULL: int
+        op: StructuredQuery.UnaryFilter.Operator
+        field: StructuredQuery.FieldReference
+    class Order(proto.Message):
+        field: StructuredQuery.FieldReference
+        direction: StructuredQuery.Direction
+    class FieldReference(proto.Message):
+        field_path: str
+    class Projection(proto.Message):
+        fields: MutableSequence['StructuredQuery.FieldReference']
+    class FindNearest(proto.Message):
+        class DistanceMeasure(proto.Enum):
+            DISTANCE_MEASURE_UNSPECIFIED: int
+            EUCLIDEAN: int
+            COSINE: int
+            DOT_PRODUCT: int
+        vector_field: StructuredQuery.FieldReference
+        query_vector: document.Value
+        distance_measure: StructuredQuery.FindNearest.DistanceMeasure
+        limit: wrappers_pb2.Int32Value
+        distance_result_field: str
+        distance_threshold: wrappers_pb2.DoubleValue
+    select: Projection
+    from_: MutableSequence[CollectionSelector]
+    where: Filter
+    order_by: MutableSequence[Order]
+    start_at: Cursor
+    end_at: Cursor
+    offset: int
+    limit: wrappers_pb2.Int32Value
+    find_nearest: FindNearest
+
+class StructuredAggregationQuery(proto.Message):
+    class Aggregation(proto.Message):
+        class Count(proto.Message):
+            up_to: wrappers_pb2.Int64Value
+        class Sum(proto.Message):
+            field: StructuredQuery.FieldReference
+        class Avg(proto.Message):
+            field: StructuredQuery.FieldReference
+        count: StructuredAggregationQuery.Aggregation.Count
+        sum: StructuredAggregationQuery.Aggregation.Sum
+        avg: StructuredAggregationQuery.Aggregation.Avg
+        alias: str
+    structured_query: StructuredQuery
+    aggregations: MutableSequence[Aggregation]
+
+class Cursor(proto.Message):
+    values: MutableSequence[document.Value]
+    before: bool

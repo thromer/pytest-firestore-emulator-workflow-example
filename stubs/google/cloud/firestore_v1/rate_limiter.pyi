@@ -1,0 +1,9 @@
+def utcnow(): ...
+
+default_initial_tokens: int
+default_phase_length: int
+microseconds_per_second: int
+
+class RateLimiter:
+    def __init__(self, initial_tokens: int = ..., global_max_tokens: int | None = None, phase_length: int = ...) -> None: ...
+    def take_tokens(self, num: int = 1, allow_less: bool = False) -> int: ...

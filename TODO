@@ -1,0 +1,8 @@
+Possible next steps:
+* Exit in session scoped fixture if FIRESTORE_EMULATOR_HOST is not set.
+* Similarly, probe emulator with short timeout and exit if it fails.
+* Derive FIRESTORE_EMULATOR_HOST from firebase.json.
+* Run tests under control of firebase emulators:exec in Github action.
+* Test Github action with act.
+* Too fancy: if emulator is not running, try starting and detaching it,
+  and parsing stdout/stderr to determine success.

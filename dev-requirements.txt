@@ -1,0 +1,6 @@
+# Packages needed for local development
+-r ci-requirements.txt
+types-requests
+mypy
+pylint
+black

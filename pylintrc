@@ -1,0 +1,4 @@
+[BASIC]
+
+# No docstrings required
+no-docstring-rgx=^.*$

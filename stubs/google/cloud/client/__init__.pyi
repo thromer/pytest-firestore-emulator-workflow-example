@@ -1,0 +1,19 @@
+from _typeshed import Incomplete
+
+class _ClientFactoryMixin:
+    @classmethod
+    def from_service_account_info(cls, info, *args, **kwargs): ...
+    @classmethod
+    def from_service_account_json(cls, json_credentials_path, *args, **kwargs): ...
+
+class Client(_ClientFactoryMixin):
+    SCOPE: tuple[str, ...] | None
+    def __init__(self, credentials: Incomplete | None = None, _http: Incomplete | None = None, client_options: Incomplete | None = None) -> None: ...
+    def close(self) -> None: ...
+
+class _ClientProjectMixin:
+    project: Incomplete
+    def __init__(self, project: Incomplete | None = None, credentials: Incomplete | None = None) -> None: ...
+
+class ClientWithProject(Client, _ClientProjectMixin):
+    def __init__(self, project: Incomplete | None = None, credentials: Incomplete | None = None, client_options: Incomplete | None = None, _http: Incomplete | None = None) -> None: ...
