@@ -2,8 +2,6 @@
 
 from google.cloud import firestore
 
-import pytest
-
 
 def test_firestore_1a(firestore_client: firestore.Client) -> None:
     print(f"{firestore_client=}")
