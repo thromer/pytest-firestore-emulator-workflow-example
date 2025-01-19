@@ -3,13 +3,9 @@
 import pytest
 
 
-pytestmark = pytest.mark.firestore
-
-
-@pytest.mark.firestore
-def test_firestore_2a() -> None:
+def test_firestore_2a(firestore_client) -> None:
     print("test_firestore_2a")
 
 
-def test_firestore_2b() -> None:
+def test_firestore_2b(firestore_client) -> None:
     print("test_firestore_2b")
